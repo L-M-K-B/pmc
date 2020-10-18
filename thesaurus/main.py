@@ -17,17 +17,23 @@ class WordFinder:
         search_term = search_term.lower()
 
         if search_term in self.data:
-            result = self.data[search_term]
+            self.create_response(search_term)
 
-            if type(result) == list:
-                for r in result:
-                    print(r)
-            else:
-                print(result)
         elif len(difflib.get_close_matches(search_term, self.data.keys())) > 0:
+            # creates 3 suggestions
             self.find_closest_match(search_term)
+
         else:
             print("This word does not exist. Please check again.")
+
+    def create_response(self, search_term):
+        result = self.data[search_term]
+
+        if type(result) == list:
+            for r in result:
+                print(r)
+        else:
+            print(result)
 
     def find_closest_match(self,search_term):
         closest_result = difflib.get_close_matches(search_term, self.data.keys())
