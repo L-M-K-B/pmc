@@ -19,9 +19,9 @@ class WordFinder:
         if search_term in self.data:
             self.create_response(search_term)
 
-        elif len(difflib.get_close_matches(search_term, self.data.keys())) > 0:
-            # creates 3 suggestions
-            self.find_closest_match(search_term)
+        elif closest_matches := difflib.get_close_matches(search_term, self.data.keys()):
+            # closest_matches always has 3 suggestions
+            self.handle_matches(closest_matches)
 
         else:
             print("This word does not exist. Please check again.")
@@ -35,16 +35,12 @@ class WordFinder:
         else:
             print(result)
 
-    def find_closest_match(self,search_term):
-        closest_result = difflib.get_close_matches(search_term, self.data.keys())
-
+    def handle_matches(self, closest_matches):
         decision = input(
-            f"Did you mean {closest_result[0]}, {closest_result[1]} or {closest_result[2]}? "
+            f"Did you mean {closest_matches[0]}, {closest_matches[1]} or {closest_matches[2]}? "
             f"Type the suitable word or N for none.")
 
-        if decision == "Y":
-            self.find_word(closest_result)
-        elif len(decision) > 1:
+        if len(decision) > 1:
             self.find_word(decision)
         else:
             return None
