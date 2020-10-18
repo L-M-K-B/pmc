@@ -1,5 +1,6 @@
-import mysql.connector
 import difflib
+
+import mysql.connector
 
 word = ""
 END = "/exit"
@@ -54,9 +55,6 @@ class WordFinder:
         if decision == 'Y':
             alt = self.handle_query(match)
             self.handle_results(alt)
-
-        else:
-            return None
 
 
 word_finder = WordFinder()

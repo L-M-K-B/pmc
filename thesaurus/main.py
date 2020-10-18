@@ -42,8 +42,6 @@ class WordFinder:
 
         if len(decision) > 1:
             self.find_word(decision)
-        else:
-            return None
 
 
 word_finder = WordFinder()
