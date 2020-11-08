@@ -19,20 +19,29 @@ def color_elevation(elevation):
 
 
 # create a map of volcanoes
-map_volcanoes = folium.Map(location=[41.520164, -100.320301], zoom_start=5, tiles="Stamen Toner")
+new_map = folium.Map(location=[41.520164, -100.320301], zoom_start=5, tiles="Stamen Toner")
 
-# create a layer for markers and add markers
-layers = folium.FeatureGroup(name="markers")
+# create a layer for volcanoes
+layer_volcanoes = folium.FeatureGroup(name="volcanoes")
 
 for lt, ln, n, e in zip(lat, lon, name, elev):
-    layers.add_child(
+    layer_volcanoes.add_child(
         folium.CircleMarker(location=(lt, ln), popup=f"Name: {n} Height: {e}m", color="black", fill=True,
                             fill_color=color_elevation(e), fill_opacity=0.7))
 
-layers.add_child(folium.GeoJson(data=open("world.json", "r", encoding="utf-8-sig").read(), style_function=lambda x:
+new_map.add_child(layer_volcanoes)
+
+# create a layer for the population
+layer_population = folium.FeatureGroup(name="population")
+
+layer_population.add_child(folium.GeoJson(data=open("world.json", "r", encoding="utf-8-sig").read(), style_function=lambda x:
 {"fillColor": "green" if x["properties"]["POP2005"] < 10000000 else "orange" if 10000000 <= x["properties"][
     "POP2005"] < 20000000 else "red" if 20000000 <= x["properties"][
     "POP2005"] < 50000000 else "darkpurple"}))
 
-map_volcanoes.add_child(layers)
-map_volcanoes.save("MapVolcanoes.html")
+new_map.add_child(layer_population)
+
+# create a control panel in order to turn single layers on and off
+new_map.add_child(folium.LayerControl())
+
+new_map.save("new_map.html")
