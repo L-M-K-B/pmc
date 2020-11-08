@@ -26,7 +26,7 @@ markers_layer = folium.FeatureGroup(name="markers")
 
 for lt, ln, n, e in zip(lat, lon, name, elev):
     markers_layer.add_child(
-        folium.Marker(location=[lt, ln], popup=f"Name: {n} Height: {e}m", icon=folium.Icon(color=color_elevation(e))))
+        folium.CircleMarker(location=(lt, ln), popup=f"Name: {n} Height: {e}m", color="black", fill=True, fill_color=color_elevation(e), fill_opacity=0.7))
 
 map_volcanoes.add_child(markers_layer)
 map_volcanoes.save("MapVolcanoes.html")
