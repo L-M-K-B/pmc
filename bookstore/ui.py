@@ -2,11 +2,51 @@ from tkinter import *
 import backend
 
 window = Tk()
+backend.create_table()
 
 
 # - # Functions # - #
+def get_input():
+    title = e_title_value.get()
+    year = e_year_value.get()
+    author = e_author_value.get()
+    isbn = e_isbn_value.get()
+    return title, year, author, isbn
+
+
+def show_result(r):
+    result.delete(0, END)
+    for item in r:
+        result.insert(END, item)
+
+
+def view_all():
+    r = backend.view_all()
+    show_result(r)
+
+
+def search():
+    r = backend.search(*get_input())
+    show_result(r)
+
+
+def insert():
+    backend.insert(*get_input())
+    view_all()
+
+
+def update():
+    backend.update(result.get(result.curselection())[0], *get_input())
+    view_all()
+
+
+def delete():
+    backend.delete(result.get(result.curselection())[0])
+    view_all()
+
+
 def close_window():
-    window.mainloop()
+    window.destroy()
 
 
 # - # Input # - #
@@ -39,22 +79,22 @@ e_isbn = Entry(window, textvariable=e_isbn_value)
 e_isbn.grid(row=2, column=4)
 
 # - # Buttons # - #
-b_view_all = Button(window, text="View All", width=16)
+b_view_all = Button(window, text="View All", width=16, command=view_all)
 b_view_all.grid(row=3, column=4)
 
-b_search = Button(window, text="Search Entry", width=16)
+b_search = Button(window, text="Search Entry", width=16, command=search)
 b_search.grid(row=4, column=4)
 
-b_add = Button(window, text="Add Entry", width=16)
+b_add = Button(window, text="Add Entry", width=16, command=insert)
 b_add.grid(row=5, column=4)
 
-b_update = Button(window, text="Update Selected", width=16)
+b_update = Button(window, text="Update Selected", width=16, command=update)
 b_update.grid(row=6, column=4)
 
-b_delete = Button(window, text="Delete Selected", width=16)
+b_delete = Button(window, text="Delete Selected", width=16, command=delete)
 b_delete.grid(row=7, column=4)
 
-b_close = Button(window, text="Close", command=close_window)
+b_close = Button(window, text="Close", width=16, command=close_window)
 b_close.grid(row=8, column=4)
 
 # - # Result # - #

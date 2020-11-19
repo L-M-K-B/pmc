@@ -22,8 +22,8 @@ def create_table():
     connect("CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY, title TEXT, year INTEGER, "
             "author TEXT, isbn INTEGER)")
 
-
-create_table()
+#
+# create_table()
 
 
 def insert(title, year, author, isbn):
@@ -34,7 +34,7 @@ def delete(book_id):
     connect(f"DELETE FROM books WHERE id={book_id}")
 
 
-def update(book_id, title="", author="", year="", isbn=""):
+def update(book_id, title="", year="", author="", isbn=""):
     if title:
         connect(f"UPDATE books SET title='{title}' WHERE id={book_id}")
     if author:
