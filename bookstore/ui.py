@@ -4,6 +4,8 @@ import backend
 window = Tk()
 backend.create_table()
 
+window.wm_title("Bookstore")
+
 
 # - # Functions # - #
 def get_input():
