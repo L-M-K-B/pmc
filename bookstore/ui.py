@@ -1,10 +1,10 @@
 from tkinter import *
-import backend
+from backend_oop import BooksBackend
 
 window = Tk()
-backend.create_table()
 
 window.wm_title("Bookstore")
+backend = BooksBackend()
 
 
 # - # Functions # - #
