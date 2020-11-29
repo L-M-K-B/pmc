@@ -25,15 +25,28 @@
         Label:
             text: "Sign up headline"
         TextInput:
+            id: username
             hint_text: "Username"
         TextInput:
+            id: password
             hint_text: "Password"
         Button:
             text: "Sign up"
-            on_press: root.sign_up()
+            on_press: root.add_user(root.ids.username.text, root.ids.password.text)
+
+<SignupScreenSuccess>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "You signed up successfully."
+        Button:
+            text: "Go to login page"
+            on_press: root.log_in()
 
 <RootWidget>:
     LoginScreen:
         name: "login_screen"
     SignupScreen:
         name: "sign_up_screen"
+    SignupScreenSuccess:
+        name: "sign_up_screen_success"
