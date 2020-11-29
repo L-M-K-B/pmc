@@ -1,5 +1,5 @@
 from tkinter import *
-from backend_oop import BooksBackend
+from backend import BooksBackend
 
 window = Tk()
 
