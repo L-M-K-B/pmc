@@ -1,0 +1,39 @@
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 1
+            Label:
+                text: "User Login"
+            TextInput:
+                hint_text: "Username"
+            TextInput:
+                hint_text: "Password"
+            Button:
+                text: "Login"
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Forgot password?"
+            Button:
+                text: "Sign Up"
+                on_press: root.sign_up()
+
+<SignupScreen>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Sign up headline"
+        TextInput:
+            hint_text: "Username"
+        TextInput:
+            hint_text: "Password"
+        Button:
+            text: "Sign up"
+            on_press: root.sign_up()
+
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+    SignupScreen:
+        name: "sign_up_screen"
