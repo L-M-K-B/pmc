@@ -1,9 +1,10 @@
+import json
+import random
+from datetime import datetime
+
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-
-from datetime import datetime
-import json
 
 Builder.load_file('design.kv')
 
@@ -49,7 +50,12 @@ class SignupScreenSuccess(Screen):
 
 class LoginScreenSuccess(Screen):
     def enlighten(self, feeling):
-        print(feeling)
+        try:
+            quotes = open(f'{feeling.lower()}.txt').read().split("\n")
+            self.ids.quote.text = random.choice(quotes)
+
+        except FileNotFoundError:
+            self.ids.quote.text = "There is not yet a quote for your feeling"
 
     def log_out(self):
         self.manager.transition.direction = 'right'
