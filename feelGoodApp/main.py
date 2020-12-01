@@ -5,6 +5,10 @@ from datetime import datetime
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
+
+from hoverable import HoverBehavior
 
 Builder.load_file('design.kv')
 
@@ -60,6 +64,10 @@ class LoginScreenSuccess(Screen):
     def log_out(self):
         self.manager.transition.direction = 'right'
         self.manager.current = 'login_screen'
+
+
+class ImageButton(ButtonBehavior, HoverBehavior, Image):
+    pass
 
 
 class RootWidget(ScreenManager):
