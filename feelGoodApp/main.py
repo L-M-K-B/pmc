@@ -13,6 +13,16 @@ class LoginScreen(Screen):
     def sign_up(self):
         self.manager.current = 'sign_up_screen'
 
+    def log_in_success(self, uname, pword):
+        with open('users.json') as file:
+            users = json.load(file)
+
+        if users.get(uname)['password'] == pword:
+            self.manager.current = 'login_screen_success'
+        else:
+            self.ids.login_wrong.text = "Wrong username or password"
+
+
 
 class SignupScreen(Screen):
 
@@ -33,6 +43,15 @@ class SignupScreen(Screen):
 
 class SignupScreenSuccess(Screen):
     def log_in(self):
+        self.manager.transition.direction = 'right'
+        self.manager.current = 'login_screen'
+
+
+class LoginScreenSuccess(Screen):
+    def enlighten(self, feeling):
+        print(feeling)
+
+    def log_out(self):
         self.manager.transition.direction = 'right'
         self.manager.current = 'login_screen'
 
