@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.sql import func
 import sys
+
+from send_email import send_email
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://laura@localhost:5432/db_web_app'
@@ -28,7 +31,7 @@ def home_page():
     return render_template("index.html")
 
 
-@app.route("/success/", methods=['POST'])
+@app.route("/success/", methods=['GET', 'POST'])
 def success_page():
     if request.method == 'POST':
         try:
@@ -37,6 +40,11 @@ def success_page():
             entry = Heights(email, height)
             db.session.add(entry)
             db.session.commit()
+
+            average = db.session.query(func.avg(Heights.height)).scalar()
+            average = round(average, 1)
+
+            # send_email(email, height, average)
             return render_template("success.html")
         except IntegrityError:
             db.session.rollback()
