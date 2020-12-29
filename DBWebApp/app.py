@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
 import sys
 
 app = Flask(__name__)
@@ -36,13 +37,16 @@ def success_page():
             entry = Heights(email, height)
             db.session.add(entry)
             db.session.commit()
-        except:
+            return render_template("success.html")
+        except IntegrityError:
             db.session.rollback()
             print(sys.exc_info())
+            return render_template("index.html",
+                                   text="It seems that we have already saved data from this email address.")
         finally:
             db.session.close()
 
-    return render_template("success.html")
+
 
 
 if __name__ == "__main__":
