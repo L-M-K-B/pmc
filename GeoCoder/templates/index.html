@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>"Super Geocoder - home"</title>
+        <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>Super Geocoder</h1>
+            <h3>Please upload a CSV file. <br> <br>
+                Make sure there is a column named address or Address containing actual addresses.</h3>
+            <p class="message">
+                {{text | safe}}
+            </p>
+            <div class="upload">
+                <form action="{{url_for('result_page')}}" method="POST" enctype="multipart/form-data">
+                    <input name="toBeUploaded" type="file" /> <br>
+                    <button name="upload" type="submit">Upload file</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
