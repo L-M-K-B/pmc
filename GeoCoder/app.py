@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from add_geo_data import process_content
+from handle_data import process_content
 
 app = Flask(__name__)
 
