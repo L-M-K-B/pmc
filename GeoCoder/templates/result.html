@@ -8,8 +8,8 @@
         <div class="wrapper">
             <h1>Super Geocoder</h1>
             <h3>Here is your result:</h3>
-            <p>RESULT</p>
-            <button type="button">Back to start page</button>
+            <div class="table_wrapper">{{table | safe}}</div>
+            <a class="download_link" href="{{download_link}}" download>Download converted CSV file</a>
         </div>
     </body>
 </html>

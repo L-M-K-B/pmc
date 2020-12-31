@@ -12,11 +12,13 @@ def add_data_geo_data(content, file_name):
     df["Latitude"] = df["Coordinates"].apply(lambda x: x.latitude if x else None)
     df["Longitude"] = df["Coordinates"].apply(lambda x: x.longitude if x else None)
     del df["Coordinates"]
-    print(df)
-    # TODO: transfer from df to csv works, but the file is being saved rather than being returned
-    file = df.to_csv(f'{file_name}updated.csv', index=False)
 
-    return file
+    html_table = df.to_html(index=False)
+
+    new_file_name = f'{file_name.split(".csv")[0]} - updated.csv'
+    df.to_csv(f'converted_files/{new_file_name}', index=False)
+
+    return new_file_name, html_table
 
 
 def process_content(original_file):

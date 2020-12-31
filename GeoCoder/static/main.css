@@ -54,3 +54,25 @@ form {
     color: midnightblue;
     font-size: 16px;
 }
+
+.table_wrapper {
+    width: 50%;
+    border-radius: 5px;
+    background-color: lavender;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    color: midnightblue;
+}
+
+.download_link {
+    margin-top: 25px;
+    width: 200px;
+    border-radius: 5px;
+    background-color: lavender;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: midnightblue;
+
+}
