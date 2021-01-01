@@ -56,10 +56,9 @@ form {
 }
 
 .table_wrapper {
-    width: 50%;
     border-radius: 5px;
     background-color: lavender;
-    padding: 20px 0;
+    padding: 20px 15px;
     display: flex;
     justify-content: center;
     color: midnightblue;

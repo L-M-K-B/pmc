@@ -23,9 +23,10 @@ def result_page():
 
         new_file_name, html_table = process_content(original_file)
 
-        return render_template("result.html", table=html_table, download_link=f'/converted_files/{new_file_name}')
-
-        # return render_template("index.html", text="Please make sure there is an address column in your file.")
+        if not new_file_name:
+            return render_template("index.html", text="Please make sure there is an address column in your file.")
+        else:
+            return render_template("result.html", table=html_table, download_link=f'/converted_files/{new_file_name}')
 
 
 @app.route('/converted_files/<path:filename>')

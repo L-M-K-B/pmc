@@ -7,8 +7,14 @@ def add_data_geo_data(content, file_name):
     df = pandas.read_csv(content)
 
     loc = ArcGIS()
-    # TODO: make sure to enable lower case for "Address" --> does solution below work?
-    df["Coordinates"] = df["Address" or "address"].apply(loc.geocode)
+    try:
+        df["Coordinates"] = df["Address"].apply(loc.geocode)
+    except KeyError:
+        try:
+            df["Coordinates"] = df["address"].apply(loc.geocode)
+        except KeyError:
+            return None, None
+
     df["Latitude"] = df["Coordinates"].apply(lambda x: x.latitude if x else None)
     df["Longitude"] = df["Coordinates"].apply(lambda x: x.longitude if x else None)
     del df["Coordinates"]
